@@ -60,5 +60,5 @@ int main(){
     int arr[] = {1,4,6,3,9,5};
     // selection(arr ,6);
     // bubble(arr ,6);
-    insertion(arr ,6);
+    // insertion(arr ,6);
 }
