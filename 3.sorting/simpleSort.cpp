@@ -39,26 +39,22 @@ void bubble(int arr[] ,int n){
     print(arr , n);
 }
 
-// void insertion(int arr[] , int n){
-//     for(int i = 0; i<n-1;i++){
-//         int j;
-//         if(arr[i]>arr[i+1]){
-//             for(j= i ; j!=0 ;j--){
-//                 if(arr[j]<arr[j-1]){
-//                     swap(arr[i], arr[j-1]);
-//                     break;
-//                 }
-//             }
-//            if(j==0) swap(arr[0], arr[i]);
-//         }
-//     }
-//     print(arr , n);
-// }
+void insertion(int arr[] , int n){
+    for(int i = 0; i <n-1; i++){
+        int j= i;
+        while(arr[j]>arr[j+1] && j>=0){
+            swap(arr[j] , arr[j+1]);
+            j--;
+        }
+    }
+    print(arr , n);
+}
 
 
 int main(){
-    int arr[] = {1,4,6,3,9,5};
+    int arr[] = {9,4,6,3,9,5};
     // selection(arr ,6);
     // bubble(arr ,6);
-    // insertion(arr ,6);
+    insertion(arr ,6);
+ 
 }
