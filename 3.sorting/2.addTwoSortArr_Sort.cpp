@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-#include<vector>;
 
 void addTwoArray(int arr1[] ,int arr2[] ,int x , int y){
     int temp[100];
@@ -21,7 +20,6 @@ void addTwoArray(int arr1[] ,int arr2[] ,int x , int y){
         }
     }
 
-cout<<"dfd "<<right<<endl;
     while(right<x){
         temp[i]=arr1[right];
         right++;
@@ -35,7 +33,6 @@ cout<<"dfd "<<right<<endl;
     for(int i = 0; i<n;i++){
         cout<<temp[i]<<" ";
     }
-
 }
 
 int main(){
