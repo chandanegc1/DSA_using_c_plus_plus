@@ -38,7 +38,14 @@ void postOreder(Node* root){
     postOreder(root->right);
     cout<<root->data<<" ";  
 }
-
+// Leel Traversal
+// void level(Node* root){
+//     queue<Node*>q;
+//     q.push(root);
+//     for(int i =0; i<q.size();i++){
+    
+//     }
+// }
 int main(){
     Node* root = new Node(1);
     root->right = new Node(2);
