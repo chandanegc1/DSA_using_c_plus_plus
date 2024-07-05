@@ -114,7 +114,7 @@ int main(){
     reverseElements(head);
     display(head);
     SearchAnElement(head , 6);
-    // deleteAnElement(head , 6);
+    deleteAnElement(head , 6);
     display(head);
     return 0;
 }
