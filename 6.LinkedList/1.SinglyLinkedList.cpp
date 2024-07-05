@@ -92,13 +92,71 @@ void SearchAnElement(Node* head , int key){
 }
 
 // 7# Delete an element from Linkedlist
-// void deleteAnElement(Node* &head , int key){
-//     Node* cur=head;
-//     while(cur->data==key && cur->next!=NULL){
-//         cur=cur->next;
-//     }
+void deleteAnElement(Node* &head , int key){
+    if(head==NULL){
+        return;
+    }
 
-// }
+    if(head->next==NULL && head->data==key){
+        delete head;
+        head=NULL;
+        return;
+    }
+
+    if(key==head->data){
+        Node* toDelete = head;
+        head=head->next;
+        delete toDelete;
+        return;
+    }
+
+    Node* temp = head;
+    while(temp->next->data!=key){
+        temp=temp->next;
+    }
+    Node* toDelete = temp->next;
+    temp->next = temp->next->next;
+    delete toDelete;
+}
+
+// 8# Cycle detection in Linkedlist
+void cycleDetect(Node* head){
+    if(head==NULL){
+        cout<<"cycle Not Found"<<endl;
+        return;
+    }
+
+    Node* slow=head;
+    Node* fast=head;
+     while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast){
+            cout<<"cycle found"<<endl;
+            break;
+        }
+     }
+     cout<<"cycle Not Found"<<endl;
+}
+
+// 9# Remove Cycle From Linkedlist
+void removeCycle(Node* head){
+    Node* slow = head;
+    Node* fast=head->next;
+
+    do{
+        slow = slow->next;
+        fast= fast->next->next;
+    }while(slow!=fast);
+
+    fast=head;
+    while(slow!=fast){
+        fast=fast->next;
+        slow=slow->next;
+    }
+    slow->next=NULL;
+}
+
 int main(){
     Node* head = NULL;
     insertAtHead(head, 1);
@@ -114,7 +172,8 @@ int main(){
     reverseElements(head);
     display(head);
     SearchAnElement(head , 6);
-    deleteAnElement(head , 6);
+    deleteAnElement(head , 4);
     display(head);
+    cycleDetect(head);
     return 0;
 }
