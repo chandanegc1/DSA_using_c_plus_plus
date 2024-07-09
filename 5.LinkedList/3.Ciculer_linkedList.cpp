@@ -11,9 +11,3 @@ class Node{
         next=NULL;
     }
 };
-
-
-
-int main(){
-
-}
