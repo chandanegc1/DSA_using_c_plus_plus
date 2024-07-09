@@ -8,7 +8,7 @@ class Node{
 
     Node(int data){
         this->data = data;
-        next=NULL;
+        next = NULL;
     }
 };
 
@@ -77,84 +77,100 @@ void reverseElements(Node* &head){
 } 
 
 // 6# Search an element in Linkedlist
-void SearchAnElement(Node* head , int key){
-    Node* cur=head;
-    int flag=0;
-    while(cur!=NULL){
-        if(cur->data==key){
-            cout<<"Element found"<<endl;
-            flag++;
+void SearchAnElement(Node* head, int key){
+    Node* cur = head;
+    bool found = false;
+    while(cur != NULL){
+        if(cur->data == key){
+            cout << "Element found" << endl;
+            found = true;
             break;
         }
-        cur=cur->next;
+        cur = cur->next;
     }
-    if(!flag) cout<<"Element not found"<<endl;
+    if(!found) cout << "Element not found" << endl;
 }
 
 // 7# Delete an element from Linkedlist
-void deleteAnElement(Node* &head , int key){
-    if(head==NULL){
-        return;
-    }
+void deleteAnElement(Node* &head, int key){
+    if(head == NULL) return;
 
-    if(head->next==NULL && head->data==key){
-        delete head;
-        head=NULL;
-        return;
-    }
-
-    if(key==head->data){
+    if(head->data == key){
         Node* toDelete = head;
-        head=head->next;
+        head = head->next;
         delete toDelete;
         return;
     }
 
     Node* temp = head;
-    while(temp->next->data!=key){
-        temp=temp->next;
+    while(temp->next != NULL && temp->next->data != key){
+        temp = temp->next;
     }
+
+    if(temp->next == NULL) {
+        cout << "Element not found" << endl;
+        return;
+    }
+
     Node* toDelete = temp->next;
     temp->next = temp->next->next;
     delete toDelete;
 }
 
 // 8# Cycle detection in Linkedlist
-void cycleDetect(Node* head){
-    if(head==NULL){
-        cout<<"cycle Not Found"<<endl;
-        return;
-    }
+bool cycleDetect(Node* head){
+    if(head == NULL) return false;
 
-    Node* slow=head;
-    Node* fast=head;
-     while(fast!=NULL && fast->next!=NULL){
-        slow=slow->next;
-        fast=fast->next->next;
-        if(slow==fast){
-            cout<<"cycle found"<<endl;
-            break;
+    Node* slow = head;
+    Node* fast = head;
+    while(fast != NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast){
+            cout << "Cycle found" << endl;
+            return true;
         }
-     }
-     cout<<"cycle Not Found"<<endl;
+    }
+    cout << "Cycle not found" << endl;
+    return false;
 }
 
 // 9# Remove Cycle From Linkedlist
 void removeCycle(Node* head){
+    if(head == NULL) return;
+
     Node* slow = head;
-    Node* fast=head->next;
+    Node* fast = head;
 
-    do{
+    // Detect cycle
+    while(fast != NULL && fast->next != NULL){
         slow = slow->next;
-        fast= fast->next->next;
-    }while(slow!=fast);
-
-    fast=head;
-    while(slow!=fast){
-        fast=fast->next;
-        slow=slow->next;
+        fast = fast->next->next;
+        if(slow == fast) break;
     }
-    slow->next=NULL;
+
+    if(slow != fast) return; // No cycle
+
+    // Find start of the cycle
+    slow = head;
+    while(slow->next != fast->next){
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    // Remove cycle
+    fast->next = NULL;
+}
+
+// 10#Function to create a cycle for testing (useless)
+void CirculerLinkedList(Node* head){
+    if(head == NULL || head->next == NULL) return;
+
+    Node* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    temp->next = head;
 }
 
 int main(){
@@ -163,17 +179,27 @@ int main(){
     insertAtHead(head, 2);
     insertAtHead(head, 3);
     insertAtHead(head, 4);
+
+    // display(head);
+    // insertAtTail(head, 5);
+    // insertAtTail(head, 6); 
+    // display(head);
+    // insertAtNthPosition(head, 2, 16);
+    // display(head);
+    // reverseElements(head);
+    // display(head);
+    // SearchAnElement(head , 6);
+    // deleteAnElement(head , 4);
+    // display(head);
+    if(cycleDetect(head)) {
+        removeCycle(head);
+    } else {
+        CirculerLinkedList(head);
+        if(cycleDetect(head)) {
+            removeCycle(head);
+        }
+    }
     display(head);
-    insertAtTail(head, 5);
-    insertAtTail(head, 6); 
-    display(head);
-    insertAtNthPosition(head, 2, 16);
-    display(head);
-    reverseElements(head);
-    display(head);
-    SearchAnElement(head , 6);
-    deleteAnElement(head , 4);
-    display(head);
-    cycleDetect(head);
+
     return 0;
 }

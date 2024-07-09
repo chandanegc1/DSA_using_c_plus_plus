@@ -2,4 +2,17 @@
 1-Sorting operation
 2-Add to Linkedlist
 3-some Other Problems solve
+
 #Doubly Linkedlist
+1-Delete
+2-Reverse
+3-other o/p
+
+#Circuler Linkedlist
+1-insertion 
+2-Deletion
+3-Display
+
+#Operations on Linkedlist
+1-even & odd possition respectively
+2-Find out InterSection point in 2 LinkedList
