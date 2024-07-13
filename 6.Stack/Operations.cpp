@@ -69,7 +69,7 @@ void prefixEvaluation(string str)
             }
         }
     }
-    cout << st.top()<<endl;
+    cout << st.top() << endl;
 }
 
 // 3# calclulate P0stfix  expresstion
@@ -116,7 +116,8 @@ void postfixEvaluation(string str)
     }
     cout << st.top() << endl;
 }
-// 4# Infix to prefix conversion
+
+// 4# Infix to postfix conversion
 int prec(char c)
 {
     if (c == '^')
@@ -154,7 +155,7 @@ void infixToPostfix(string str)
         }
         else
         {
-            while (!st.empty() && prec(str[i]) <=prec(st.top()))
+            while (!st.empty() && prec(str[i]) <= prec(st.top()))
             {
                 sum += st.top();
                 st.pop();
@@ -162,30 +163,84 @@ void infixToPostfix(string str)
             st.push(str[i]);
         }
     }
-     while (!st.empty())
+    while (!st.empty())
     {
         sum += st.top();
         st.pop();
     }
     cout << "Postfix expression: " << sum << endl;
 }
+
+// 5# Infix to prefix conversion
+void infixToPrefix(string str) {
+    stack<char> st;
+    string sum = "";
+    int n = str.size();
+    
+    // Reverse the input string
+    reverse(str.begin(), str.end());
+
+    for (int i = 0; i < n; i++) {
+        if (str[i] == '(') {
+            str[i] = ')';
+        } else if (str[i] == ')') {
+            str[i] = '(';
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (str[i] >= '0' && str[i] <= '9') {
+            sum += str[i];
+        }
+        else if (str[i] == '(') {
+            st.push(str[i]);
+        }
+        else if (str[i] == ')') {
+            while (!st.empty() && st.top() != '(') {
+                sum += st.top();
+                st.pop();
+            }
+            if (!st.empty() && st.top() == '(')
+                st.pop();
+        }
+        else {
+            while (!st.empty() && prec(str[i]) < prec(st.top())) {
+                sum += st.top();
+                st.pop();
+            }
+            st.push(str[i]);
+        }
+    }
+
+    while (!st.empty()) {
+        sum += st.top();
+        st.pop();
+    }
+
+    // Reverse the result to get the prefix expression
+    reverse(sum.begin(), sum.end());
+
+    cout << "Prefix expression: " << sum << endl;
+}
+
 int main()
 {
     // Test reverseSentence function
     string sentence = "How are you?";
     reverseSentence(sentence);
-    
+
     // Test prefixEvaluation function
     string prefixExpr = "+*123";
     prefixEvaluation(prefixExpr);
-    
+
     // Test postfixEvaluation function
     string postfixExpr = "231*+9-";
     postfixEvaluation(postfixExpr);
-    
+
     // Test infixToPostfix function
     string infixExpr = "3+5*(2-8)";
     infixToPostfix(infixExpr);
+    infixToPrefix(infixExpr);
 
     return 0;
 }
