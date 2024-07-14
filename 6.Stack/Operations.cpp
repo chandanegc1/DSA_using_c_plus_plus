@@ -176,7 +176,7 @@ void infixToPrefix(string str) {
     stack<char> st;
     string sum = "";
     int n = str.size();
-    
+
     // Reverse the input string
     reverse(str.begin(), str.end());
 
@@ -188,6 +188,7 @@ void infixToPrefix(string str) {
         }
     }
 
+//  from here,all code is same as postfix conversion
     for (int i = 0; i < n; i++) {
         if (str[i] >= '0' && str[i] <= '9') {
             sum += str[i];
@@ -223,6 +224,44 @@ void infixToPrefix(string str) {
     cout << "Prefix expression: " << sum << endl;
 }
 
+// 6# Balance Parenthesis or not
+bool isBalanceParenth(string s){
+    stack<char>st;
+    for(int i =0 ; i<s.size();i++){
+        if(s[i]=='(' || s[i]=='{'|| s[i]=='[') st.push(s[i]);
+
+        else if(s[i]==')'){
+            while(!st.empty() && st.top()!='(' ){
+                st.pop();
+            }
+            if(!st.empty() && st.top()=='('){
+                st.pop();
+            }
+        }
+        else if(s[i]=='}'){
+            while(!st.empty() && st.top()!='{' ){
+                st.pop();
+            }
+            if(!st.empty() && st.top()=='{'){
+                st.pop();
+            }
+        }
+        else if(s[i]==']'){
+            while(!st.empty() && st.top()!='[' ){
+                st.pop();
+            }
+            if(!st.empty() && st.top()=='['){
+                st.pop();
+            }
+        }
+        
+    }
+    if(st.empty()){
+        return true;
+    }
+    return false;
+}
+
 int main()
 {
     // Test reverseSentence function
@@ -241,6 +280,8 @@ int main()
     string infixExpr = "3+5*(2-8)";
     infixToPostfix(infixExpr);
     infixToPrefix(infixExpr);
-
+    // Test BalanceParenthesis function
+    string balance = "[{()}]";
+    cout<<isBalanceParenth(balance)<<endl;
     return 0;
 }

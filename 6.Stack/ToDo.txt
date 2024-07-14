@@ -1,0 +1,12 @@
+1========Implementation===========
+1# Stack Implementation using Array
+2# Stack Implementation using Linkedlist*
+
+2========Operations===========
+1#Function to reverse a sentence
+2# calclulate Prefix  expresstion
+3# calclulate P0stfix  expresstion
+4# Infix to postfix conversion
+5# Infix to prefix conversion
+6# Balance Parenthesis or not*
+7# Parrthesis and express to make calculator (imp)
