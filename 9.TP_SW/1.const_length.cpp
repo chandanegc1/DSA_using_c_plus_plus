@@ -18,7 +18,7 @@ int maxSum(int arr[], int n, int k){
 }
 
 // 2# find the maximum subarray lenght that is ans>=k
-void subarray(int arr[], int n, int k) {
+void maxSubarray(int arr[], int n, int k) {
     int l = 0, maxSum = 0, ansR = 0, ansL = 0, sum = 0;
     for (int i = 0; i < n; i++) {
         sum += arr[i];
@@ -39,10 +39,29 @@ void subarray(int arr[], int n, int k) {
     cout << endl;
 }
 
+// 3# Maximum Point you can obtain from cards 
+void maxPointCards(int arr [], int k , int n){
+    int ans =0 , maxsum = 0 ;
+    for(int i = 0 ; i<k ; i++){
+        ans+=arr[i];
+    }
+
+    maxsum=ans;
+    int rindex = n-1;
+    for(int i = k-1; i>=0;i--){
+        maxsum-= arr[i];
+        maxsum+=arr[rindex];
+        rindex--;
+        ans = max(ans , maxsum);
+    }
+    cout<<ans<<endl;
+}
 int main(){
     // int arr[] = {-1, 2, 3, 3, 4, 5, -1};
     int arr2[] = {6,2,3,4,7,2,1,7,1};
     // cout<<maxSum(arr,7,4)<<endl;
-    subarray(arr2, 9,14);
+    // maxSubarray(arr2, 9,14);
+    maxPointCards(arr2, 4,9);
+
     return 0;
 }
