@@ -14,7 +14,7 @@ int main(){
         if(mp[str[i]]==1){
             l+=1;
         }else{
-            i = 
+          
         }
 
     }
