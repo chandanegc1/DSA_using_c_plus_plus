@@ -85,7 +85,7 @@ void fruitIntoBasket(int arr[], int n){
     int init2;
     for(int i = 0 ; i<n;i++){
         if(arr[i]!=init1){
-            init2 = arr[0];
+            init2 = arr[i];
             break;
         }
     }
@@ -98,10 +98,10 @@ void fruitIntoBasket(int arr[], int n){
         }else if(arr[i]==init2){
             basket2++;
         }else{
-            init1=init2;
-            basket1=basket2;
-            init2=arr[i];
-            basket2=1;
+            init1 = init2;
+            init2 = arr[i];
+            basket2 = 1;
+            basket1 = 0;
         }
         ans=max(ans , (basket1+basket2));
     }
@@ -115,7 +115,7 @@ int main(){
     // maxPointCards(arr2, 4,9);
     // int arr3[] = {1,1,1,0,0,0,1,1,1,1,0};
     // maxConsecutive(arr3 , 11 , 2);
-    int arr6[] = {3,3,3,1,2,1,1,2,3};
-    fruitIntoBasket(arr6 ,9);
+    int arr6[] = {0, 0, 2, 0, 1, 2, 1, 2, 2, 1, 0, 0, 1, 2, 0, 1, 1, 1, 2, 2, 0, 0};
+    fruitIntoBasket(arr6, 22);
     return 0;
 }
