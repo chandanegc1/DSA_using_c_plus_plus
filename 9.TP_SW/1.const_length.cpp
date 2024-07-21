@@ -81,31 +81,22 @@ void maxConsecutive(int arr[], int n , int k){
 
 // 6# Fruit into Basket , Basket size = 2
 void fruitIntoBasket(int arr[], int n){
-    int init1 = arr[0];
-    int init2;
-    for(int i = 0 ; i<n;i++){
-        if(arr[i]!=init1){
-            init2 = arr[i];
-            break;
-        }
-    }
+    unordered_map<int, int> fruitCount;
+    int maxFruits = 0, start = 0;
 
-    int basket1=0 , basket2 = 0;
-    int ans=0;
-    for(int i =0; i<n;i++){
-        if(arr[i]==init1){
-            basket1++;
-        }else if(arr[i]==init2){
-            basket2++;
-        }else{
-            init1 = init2;
-            init2 = arr[i];
-            basket2 = 1;
-            basket1 = 0;
+    for (int end = 0; end < n; ++end) {
+        fruitCount[arr[end]]++;
+
+        while (fruitCount.size() > 2) {
+            fruitCount[arr[start]]--;
+            if (fruitCount[arr[start]] == 0) {
+                fruitCount.erase(arr[start]);
+            }
+            start++;
         }
-        ans=max(ans , (basket1+basket2));
+        maxFruits = max(maxFruits, end - start + 1);
     }
-    cout<<ans<<endl;
+    cout << maxFruits << endl;
 }
 int main(){
     // int arr[] = {-1, 2, 3, 3, 4, 5, -1};
