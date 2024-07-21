@@ -56,12 +56,35 @@ void maxPointCards(int arr [], int k , int n){
     }
     cout<<ans<<endl;
 }
+
+// 4# Longest Substring without repeating characters
+void LongSubString(string str){
+    unordered_map<char , int>mp;
+}
+
+// 5# Max consecutive , zero flip 1 a/c to k value
+void maxConsecutive(int arr[], int n , int k){
+    int ans =0, zeroLen = 0 , mxlen = 0;
+    for(int i = 0 ; i<n ; i++){
+        if(arr[i]==0 || arr[i]==1 && zeroLen<=k){
+            if(arr[i]==0)
+               zeroLen++;
+            mxlen++;
+        }else{
+            zeroLen=1;
+            mxlen=1;
+        }
+        ans=max(ans,mxlen);
+    }
+    cout<<ans<<endl;
+} 
 int main(){
     // int arr[] = {-1, 2, 3, 3, 4, 5, -1};
-    int arr2[] = {6,2,3,4,7,2,1,7,1};
+    // int arr2[] = {6,2,3,4,7,2,1,7,1};
     // cout<<maxSum(arr,7,4)<<endl;
     // maxSubarray(arr2, 9,14);
-    maxPointCards(arr2, 4,9);
-
+    // maxPointCards(arr2, 4,9);
+    int arr3[] = {1,1,1,0,0,0,1,1,1,1,0};
+    maxConsecutive(arr3 , 11 , 2);
     return 0;
 }
