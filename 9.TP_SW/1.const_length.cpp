@@ -62,7 +62,7 @@ void LongSubString(string str){
     unordered_map<char , int>mp;
 }
 
-// 5# Max consecutive , zero flip 1 a/c to k value
+// 5# Max consecutive ONE, zero flip 1 a/c to k value
 void maxConsecutive(int arr[], int n , int k){
     int ans =0, zeroLen = 0 , mxlen = 0;
     for(int i = 0 ; i<n ; i++){
